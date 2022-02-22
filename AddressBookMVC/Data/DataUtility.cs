@@ -4,7 +4,7 @@ namespace AddressBookMVC.Data
 {
     public static class DataUtility
     {
-        public static string GetConnectionString(IConfiguration configuration)
+        public static string? GetConnectionString(IConfiguration configuration)
         {
             //The default connection string will come from appSettings like usual
             var connectionString = configuration.GetConnectionString("DefaultConnection");
