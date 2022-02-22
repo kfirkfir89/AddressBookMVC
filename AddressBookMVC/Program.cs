@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.AddJsonConsole();
-builder.Configuration.AddIniFile("appsettings.ini");
 
 
 // Add services to the container.
@@ -23,17 +22,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    db.Database.Migrate();
-}
-
-static async Task<ApplicationDbContext> MigrateAsync(string[] args)
-{
-
-    var dbContext = app.Services
-                    .CreateScope().ServiceProvider
-                    .GetRequiredService<ApplicationDbContext>;
-    await dbContext.Database.MigrateAsync();
-    return host;
+    await db.Database.MigrateAsync();
 }
 
 

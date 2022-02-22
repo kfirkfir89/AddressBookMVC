@@ -36,3 +36,4 @@ namespace AddressBookMVC.Data
             return builder.ToString();
         }
     }
+}
