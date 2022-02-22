@@ -18,13 +18,18 @@ builder.Services.AddScoped<IImageService, BasicImageService>();
 
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    await db.Database.MigrateAsync();
-}
 
+var app = builder.Build();
+
+async Task host(WebApplication app)
+{
+    var dbContext = app.Services
+                        .CreateScope().ServiceProvider
+                        .GetRequiredService<ApplicationDbContext>();
+
+    await dbContext.Database.MigrateAsync();
+
+}
 
 
 // Configure the HTTP request pipeline.
@@ -47,3 +52,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
