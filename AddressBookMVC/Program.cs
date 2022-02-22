@@ -22,7 +22,7 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-async Task host(WebApplication app)
+static async Task host(WebApplication app)
 {
     var dbContext = app.Services
                         .CreateScope().ServiceProvider
@@ -31,7 +31,7 @@ async Task host(WebApplication app)
     await dbContext.Database.MigrateAsync();
 
 }
-
+await host(app);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
