@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.AddJsonConsole();
+builder.Host.UseEnvironment("Development");
 
 
 // Add services to the container.
